@@ -1,0 +1,5 @@
+<% for(id=<%= users[i]._id%>) { %>
+    <%= users[i].name %>
+    <%= users[i].email %>
+    <%= users[i].gender %>
+<% } %>

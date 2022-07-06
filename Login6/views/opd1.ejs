@@ -1,0 +1,176 @@
+<%-include('./partial/header')-%>
+      <!-- vertical nav.... -->
+
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>Patient Info</h2>
+        <ul>
+            <li><a href="#General">General</a></li>
+            <li><a href="#Health">Health</a></li>
+            <li><a href="#Contact">Contact</a></li>
+            <li><a href="#">Medical history</a></li>
+            <li><a href="#">Vaccination</a></li>
+            <li><a href="#">Prescription</a></li>
+            <!-- <li><a href="#"><i class="fas fa-blog"></i>Live Meet</a></li> -->
+        </ul>
+    </div>
+</div>
+
+<h2>Prescription</h2>
+<div class="columns">
+    <div class="column1">
+        <h1>Prescription</h1>
+        <form action="record" method="POST">
+            <div >
+                <label for="Symptoms" >Symptoms </label>
+                <input type="text" name="Symptoms" value="" placeholder="Symptoms" style="width: 25%;"><br><br>
+            </div>
+            <div>
+                <label for="Medical_tests" >Medical tests</label>
+                <input type="text" name="Medical_tests" value="" placeholder="Medical tests"><br><br>
+            </div>
+            <div>
+                <label for="Test_reports" >Test reports</label>
+                <input type="text" name="Test_reports" value="" placeholder="Test reports">
+                <input type="file" name="Test_file" multiple><br><br>
+            </div>
+            <div>
+                <h2>Medicine and dosage</h2>
+                <table>
+                   <th>
+                       Medicine  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                   </th>
+                   <th>
+                        Amount  &nbsp&nbsp
+                    </th>
+                   <th>
+                       M  &nbsp&nbsp
+                   </th>
+                   <th>
+                       E  &nbsp&nbsp
+                   </th>
+                   <th>
+                       N &nbsp&nbsp
+                   </th>
+                   <th>
+                       Days  
+                   </th>
+                   <tr> 
+                       <td><input type="text" name="med1" placeholder="Medicine name"></td>
+                       <td><input type ="number" name="amount1" style="width: 50px;"></td>
+                       <td><input type="checkbox" name="m1" ></td> 
+                       <td><input type="checkbox" name="e1"></td>
+                       <td><input type="checkbox" name="n1"></td>
+                       <td><input type ="number" name="days1" style="width: 50px;"></td>
+
+                   </tr>
+                   <tr>
+                       <td><input type ="text" name="med2" placeholder="Medicine name"></td>
+                       <td><input type ="number" name="amount2" style="width: 50px;"></td>
+                       <td><input type="checkbox" name="m2" ></td>
+                       <td><input type="checkbox" name="e2"></td>
+                       <td><input type="checkbox" name="n2"></td>
+                       <td><input type ="number" name="days2" style="width: 50px;"></td>
+                   </tr>
+                   <tr>
+                       <td><input type ="text" name="med3" placeholder="Medicine name"></td> 
+                       <td><input type ="number" name="amount3" style="width: 50px;"></td>
+                       <td><input type="checkbox" name="m3" ></td>
+                       <td><input type="checkbox" name="e3"></td>
+                       <td><input type="checkbox" name="n3"></td>
+                       <td><input type ="number" name="days3" style="width: 50px;"></td>
+                   </tr>
+                   <tr>
+                       <td><input type ="text" name="med4" placeholder="Medicine name"></td>
+                       <td><input type ="number" name="amount4" style="width: 50px;"></td>
+                       <td><input type="checkbox" name="m4" ></td>
+                       <td><input type="checkbox" name="e4"></td>
+                       <td><input type="checkbox" name="n4"></td>
+                       <td><input type ="number" name="days4" style="width: 50px;"></td>
+                   </tr>
+                   <tr>
+                       <td><input type ="text" name="med5" placeholder="Medicine name"></td>
+                       <td><input type ="number" name="amount5" style="width: 50px;"></td>
+                       <td><input type="checkbox" name="m5" ></td>
+                       <td><input type="checkbox" name="e5"></td>
+                       <td><input type="checkbox" name="n5"></td>
+                       <td><input type ="number" name="days5" style="width: 50px;"></td>
+                   </tr>
+                   <tr>
+                       <td><input type ="text" name="med6" placeholder="Medicine name"></td>
+                       <td><input type ="number" name="amount6" style="width: 50px;"></td>
+                       <td><input type="checkbox" name="m6" ></td>
+                       <td><input type="checkbox" name="e6"></td>
+                       <td><input type="checkbox" name="n6"></td>
+                       <td><input type ="number" name="days6" style="width: 50px;"></td>
+                   </tr>
+                </table>
+            </div>
+           <div class="mb-3">
+                <label for="gender" class="text-light">Doctor's advice</label>
+                <textarea class="form-control" name= "advised" rows="3"></textarea>
+           </div>
+
+            <div>
+            <button type="submit" class="btn text-dark ">Save</button>
+            </div>
+            <div class="columns column2">
+                <h3>Voice</h3>
+                <p>"This section of content is Permisible only for doctor to speak."</p>
+                <textarea class="form-control" id="speechToText" name="speechToText" rows="15"  onclick="record()"></textarea>
+                 <script>
+                     function record() {
+                         var recognition = new webkitSpeechRecognition();
+                         recognition.lang = "en-GB";
+                         recognition.onresult = function(event) {
+                             // console.log(event);
+                             document.getElementById('speechToText').value = event.results[0][0].transcript;
+                         }
+                         recognition.start();
+                     }
+                 </script>
+             </div>
+             
+        </form>
+    </div>
+</div>
+
+   
+<%if(npt.length>0){%>
+    <center>
+        <div id="General">
+            <%for(var i=0;i< npt.length;i++){%>
+                Patient name: <%=npt[i].name%>
+                <br>Email : <%=npt[i].email%>
+                <br>Gender: <%=npt[i].gender%>
+                <br>DOB : <%=npt[i].DOB%>
+            <%}%>
+        </div>
+        <div id="Contact">
+            <%for(var i=0;i< npt.length;i++){%>
+                <br>Address: <%=npt[i].Address%>
+                <br>Contact_number: <%=npt[i].Contact_number%>
+                <br>Occupation : <%=npt[i].Occupation%>
+            <%}%>
+        </div>
+        <div id="Health">
+            <%for(var i=0;i< npt.length;i++){%>
+                <br>Bloodgroup : <%=npt[i].Bloodgroup%>
+                <br>Bloodsugar : <%=npt[i].Bloodsugar%>
+                <br>Hypertension: <%=npt[i].Hypertension%>
+                <br>Allergy:  <%=npt[i].Allergy%>
+                <br>Insurance : <%=npt[i].Insurance%>
+            <%}%>
+        </div>
+    </center>
+<%}%>
+
+   
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
